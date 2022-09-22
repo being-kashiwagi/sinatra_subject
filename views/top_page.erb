@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>メモ帳-TOP</title>
+    <link rel="stylesheet" href="/views.css">
+  </head>
+  <body>
+    <h1>メモ帳</h1>
+    <form class="form" action="/memo/create-page" method="GET">
+    <% if @memo_data.length > 0 then %>
+      <input type="hidden" name="id" value="<%= @memo_data.slice(-1)['id'].to_i + 1 %>">
+    <% else %>
+      <input type="hidden" name="id" value="1">
+    <% end %>
+      <input type="submit" value="新規作成">
+    </form>
+    <ul>
+    <% if @memo_data.length > 0 then %>
+      <% @memo_data.length.times do |i| %>
+      <li><a href="./memo/detail-page/<%= @memo_data[i]['id'] %>"><%= "#{@memo_data[i]['title']}" %></a></li>
+      <% end %>
+    <% end %>
+    </ul>
+  </body>
+</html>
