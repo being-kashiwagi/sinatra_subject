@@ -1,3 +1,4 @@
+<% require 'cgi/escape' %>
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -9,11 +10,11 @@
     <h1>メモ帳</h1>
     <div class="box">
     <p>タイトル：</p>
-    <p><%= p @title %></p>
+    <p><%= p CGI.escapeHTML(@title) %></p>
     </div>
     <div class="box">
     <p>内容：</p>
-    <p><%= p @content %></p>
+    <p><%= p CGI.escapeHTML(@content).gsub(/\R/, '<br>') %></p>
     </div>
     <form class="form" action="/memo/edit-page" method="GET">
       <input type="hidden" name="id" value="<%= params['id'] %>">

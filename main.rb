@@ -3,7 +3,6 @@
 require 'sinatra'
 require 'sinatra/reloader'
 require 'json'
-require 'cgi/escape'
 
 def read_all_memos
   memo = []
@@ -37,16 +36,16 @@ end
 get '/memo/detail-page/:id' do
   @id = params[:id]
   memo = read_memo(params[:id], read_all_memos)
-  @title = CGI.escapeHTML(memo[:title])
-  @content = CGI.escapeHTML(memo[:content]).gsub(/\R/, '<br>')
+  @title = memo[:title]
+  @content = memo[:content]
   erb :detail_page
 end
 
 get '/memo/edit-page' do
   @id = params[:id]
   memo = read_memo(params[:id], read_all_memos)
-  @title = CGI.escapeHTML(memo[:title])
-  @content = CGI.escapeHTML(memo[:content]).gsub(/\R/, '<br>')
+  @title = memo[:title]
+  @content = memo[:content]
   erb :edit_page
 end
 
@@ -61,15 +60,15 @@ post '/memo' do
 end
 
 patch '/memo' do
-  memo = read_all_memos
-  memo.length.times do |i|
-    if memo[i]['id'].to_s == params['id'].to_s
-      memo[i]['title'] = params['title']
-      memo[i]['content'] = params['content']
+  memos = read_all_memos
+  memos.filter_map do |memo|
+    if memo['id'] == params['id']
+      memo['title'] = params['title']
+      memo['content'] = params['content']
     end
   end
   File.open('./public/memo.json', 'w') do |f|
-    JSON.dump(memo, f)
+    JSON.dump(memos, f)
   end
   redirect to '/'
 end

@@ -1,3 +1,4 @@
+<% require 'cgi/escape' %>
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -11,10 +12,10 @@
       <input type="hidden" name="_method" value="patch">
       <input type="hidden" name="id" value="<%= params['id'] %>">
       <label class="label_left" for="title">タイトル</label><br>
-      <input type="text" name="title" value="<%= @title %>" required>
+      <input type="text" name="title" value="<%= CGI.escapeHTML(@title) %>" required>
       <br><br>
       <label class="label_left" for="content">内容</label><br>
-      <textarea name="content"><%= @content.gsub("<br>", "\r\n") %></textarea><br><br>
+      <textarea name="content"><%= CGI.escapeHTML(@content).gsub("<br>", "\r\n") %></textarea><br><br>
       <input type="submit" value="変更">
     </form>
     <form class="form" action="/" method="GET">
