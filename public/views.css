@@ -1,0 +1,83 @@
+h1 {
+	position: relative;
+	background: #dfefff;
+	box-shadow: 0px 0px 0px 5px #dfefff;
+	border: dashed 2px white;
+	padding: 0.2em 0.5em;
+	color: #454545;
+}
+
+h1:after {
+	position: absolute;
+	content: '';
+	left: -7px;
+	top: -7px;
+	border-width: 0 0 15px 15px;
+	border-style: solid;
+	border-color: #fff #fff #a8d4ff;
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+}
+
+ul {
+	padding: 0;
+}
+
+ul li, ol li {
+	color: #404040;
+	border-left: solid 6px #1fa67a;/*左側の線*/
+	border-bottom: solid 2px #dadada;/*下に灰色線*/
+	background: whitesmoke;
+	margin-bottom: 5px;/*下のバーとの余白*/
+	line-height: 1.5;
+	padding: 0.5em;
+	list-style-type: none!important;/*ポチ消す*/
+	font-weight: bold;
+}
+
+.box{
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    color: #5d627b;
+    background: white;
+    border-top: solid 5px #5d627b;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+.box p {
+    margin: 0; 
+    padding: 0;
+}
+
+.form{
+	width: 100%;
+	margin:0 auto;
+	padding: 10px;
+	box-sizing: border-box;
+}
+
+.label_left{
+	display: inline-block;
+	width:25%;
+	border-left: solid 5px #5250e0;
+	padding-left: 15px;
+	vertical-align:top;
+}
+
+.form input[type="text"]{
+	padding: 10px;
+	width: 65%;
+}
+
+.form textarea{
+	padding: 10px;
+	height: 100px;
+	font-size: 14px;
+	width: 65%;
+}
+
+.form input[type="submit"]{
+	background: #5250e0;
+	color: white;
+	font-size:16px;
+	font-weight:bold;
+	padding: 10px 20px;
+}

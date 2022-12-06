@@ -1,0 +1,32 @@
+<% require 'cgi/escape' %>
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>メモ帳-メモ表示</title>
+    <link rel="stylesheet" href="/views.css">
+  </head>
+  <body>
+    <h1>メモ帳</h1>
+    <div class="box">
+    <p>タイトル：</p>
+    <p><%= p CGI.escapeHTML(@title) %></p>
+    </div>
+    <div class="box">
+    <p>内容：</p>
+    <p><%= p CGI.escapeHTML(@content).gsub(/\R/, '<br>') %></p>
+    </div>
+    <form class="form" action="/memo/edit-page" method="GET">
+      <input type="hidden" name="id" value="<%= params['id'] %>">
+      <input type="submit" value="変更">
+    </form>
+    <form class="form" action="/memo" method="POST">
+      <input type="hidden" name="_method" value="delete">
+      <input type="hidden" name="id" value="<%= params['id'] %>">
+      <input type="submit" value="削除">
+    </form>
+    <form class="form" action="/" method="GET">
+      <input type="submit" value="戻る">
+    </form>
+  </body>
+</html>
