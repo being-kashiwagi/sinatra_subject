@@ -12,16 +12,9 @@ def read_all_memos
   memo
 end
 
-def read_memo(id, memo)
-  title = ''
-  content = ''
-  memo.length.times do |i|
-    if memo[i]['id'].to_s == id.to_s
-      title = memo[i]['title']
-      content = memo[i]['content']
-    end
-  end
-  { title: title, content: content }
+def read_memo(id, memos)
+  memo = memos.filter { |item| item['id'] == id }
+  { title: memo[0]['title'], content: memo[0]['content'] }
 end
 
 get '/' do
@@ -61,7 +54,7 @@ end
 
 patch '/memo' do
   memos = read_all_memos
-  memos.filter_map do |memo|
+  memos.each do |memo|
     if memo['id'] == params['id']
       memo['title'] = params['title']
       memo['content'] = params['content']
